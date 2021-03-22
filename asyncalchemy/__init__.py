@@ -6,7 +6,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from sqlalchemy.engine.base import Engine
-from sqlalchemy.ext.declarative.api import DeclarativeMeta
+from packaging import version
+import sqlalchemy
+if version.parse(sqlalchemy.__version__)<version.parse('1.4'):
+    from sqlalchemy.ext.declarative.api import DeclarativeMeta
+else:
+    from sqlalchemy.ext.declarative import DeclarativeMeta
 
 from asyncalchemy.session_committer import SessionCommitter
 
